@@ -1,0 +1,20 @@
+{
+  "name": "codechallenge",
+  "version": "1.0.0",
+  "description": "Processing customer tasks from a todo list",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "test": "tsc && nyc --reporter=html --reporter=text jasmine --config=spec/support/jasmine.json"
+  },
+  "author": "Stephanie Verlingo",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jasmine": "3.3.13",
+    "jasmine": "3.4.0",
+    "nyc": "14.1.1",
+    "tslint": "^5.18.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "typescript": "^3.5.3"
+  }
+}
