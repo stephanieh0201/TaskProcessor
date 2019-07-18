@@ -4,13 +4,19 @@
   "description": "Processing customer tasks from a todo list",
   "main": "dist/index.js",
   "scripts": {
-    "start": "tsc && node dist/index.js",
+    "clean": "rimraf dist",
+    "build": "tsc",
+    "start": "npm run clean && npm run build && node dist/src/index.js",
+    "fifo": "npm run clean && npm run build && node dist/src/index.js",
+    "round": "npm run clean && npm run build && node dist/src/index.js round",
+    "balanced": "npm run clean && npm run build && node dist/src/index.js balanced",
     "test": "tsc && nyc --reporter=html --reporter=text jasmine --config=spec/support/jasmine.json"
   },
   "author": "Stephanie Verlingo",
   "license": "ISC",
   "devDependencies": {
     "@types/jasmine": "3.3.13",
+    "@types/node": "^12.6.6",
     "jasmine": "3.4.0",
     "nyc": "14.1.1",
     "tslint": "^5.18.0",
