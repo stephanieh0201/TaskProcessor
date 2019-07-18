@@ -6,21 +6,29 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "tsc",
-    "start": "npm run clean && npm run build && node dist/src/index.js",
-    "fifo": "npm run clean && npm run build && node dist/src/index.js",
-    "round": "npm run clean && npm run build && node dist/src/index.js round",
-    "balanced": "npm run clean && npm run build && node dist/src/index.js balanced",
-    "test": "tsc && nyc --reporter=html --reporter=text jasmine --config=spec/support/jasmine.json"
+    "prepare": "npm run clean && npm run build",
+    "start": "npm run prepare && node dist/src/index.js",
+    "startquick": "npm run build && node dist/src/index.js",
+    "fifo": "npm run prepare && node dist/src/index.js",
+    "round": "npm run prepare && node dist/src/index.js round",
+    "balanced": "npm run clean && node dist/src/index.js balanced",
+    "test": "npm run prepare && nyc jasmine"
   },
   "author": "Stephanie Verlingo",
   "license": "ISC",
   "devDependencies": {
     "@types/jasmine": "3.3.13",
+    "@types/mongoose": "^5.5.8",
     "@types/node": "^12.6.6",
     "jasmine": "3.4.0",
-    "nyc": "14.1.1",
+    "nyc": "^14.1.1",
+    "rimraf": "^2.6.3",
+    "source-map-support": "^0.5.12",
     "tslint": "^5.18.0",
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "mongoose": "^5.6.5"
   }
 }
