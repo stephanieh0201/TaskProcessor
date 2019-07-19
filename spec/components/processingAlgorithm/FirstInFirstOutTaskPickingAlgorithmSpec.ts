@@ -1,39 +1,38 @@
-import RandomNumberGenerator from '../../../src/components/helpers/RandomNumberGenerator';
-import BalancedRoundRobinTaskPickingAlgorithm
-  from '../../../src/components/processingAlgorithm/BalancedRoundRobinTaskPickingAlgorithm';
 import { mockList } from '../../helpers/mockTasks';
 import { mockCustomers } from '../../helpers/mockCustomers';
+import RandomNumberGenerator from '../../../src/components/helpers/RandomNumberGenerator';
+import FirstInFirstOutTaskPickingAlgorithm
+  from '../../../src/components/taskPickingAlgorithm/FirstInFirstOutTaskPickingAlgorithm';
 
-describe('A BalancedRoundRobinTaskPickingAlgorithm', () => {
+describe('A FirstInFirstOutTaskPickingAlgorithm', () => {
   const randomNumberGeneratorMock = {} as RandomNumberGenerator;
 
   describe('Moving next task to processing', () => {
     describe('Successfully with items in todo list', () => {
-      const balancedRoundRobinTaskPickingAlgorithm = new BalancedRoundRobinTaskPickingAlgorithm(
-        mockList.items,
+      const list = mockList;
+      console.log(list.items.length);
+
+      const firstInFirstOutTaskPickingAlgorithm = new FirstInFirstOutTaskPickingAlgorithm(
+        list.items,
         10,
         mockCustomers.customers,
         randomNumberGeneratorMock);
 
       let result;
 
-      beforeAll(() => {
+      beforeEach(() => {
         randomNumberGeneratorMock.execute = () => 2;
 
-        result = balancedRoundRobinTaskPickingAlgorithm.selectNextTaskToProcess();
+        result = firstInFirstOutTaskPickingAlgorithm.selectNextTaskToProcess();
       });
 
-      it('Returns first task: customer 1', () => {
-        expect(result.customerId).toBe('1');
-      });
-
-      it('Returns first task: id 13', () => {
+      it('Returns next task', () => {
         expect(result._id).toBe('13');
       });
     });
 
     describe('Successfully without items in todo list', () => {
-      const balancedRoundRobinTaskPickingAlgorithm = new BalancedRoundRobinTaskPickingAlgorithm(
+      const firstInFirstOutTaskPickingAlgorithm = new FirstInFirstOutTaskPickingAlgorithm(
         [],
         10,
         mockCustomers.customers,
@@ -41,21 +40,20 @@ describe('A BalancedRoundRobinTaskPickingAlgorithm', () => {
 
       let result;
 
-      beforeAll(() => {
+      beforeEach(() => {
         randomNumberGeneratorMock.execute = () => 2;
 
-        result = balancedRoundRobinTaskPickingAlgorithm.selectNextTaskToProcess();
+        result = firstInFirstOutTaskPickingAlgorithm.selectNextTaskToProcess();
       });
 
-      it('Returns array of undefined', () => {
+      it('Returns undefined', () => {
         expect(result).toBe(undefined);
       });
     });
   });
-
   describe('Removing task from processing', () => {
     describe('Successfully', () => {
-      const balancedRoundRobinTaskPickingAlgorithm = new BalancedRoundRobinTaskPickingAlgorithm(
+      const firstInFirstOutTaskPickingAlgorithm = new FirstInFirstOutTaskPickingAlgorithm(
         [ {_id: '1', customerId: '1', insertedTime: new Date().toString() }],
         10,
         mockCustomers.customers,
@@ -66,8 +64,8 @@ describe('A BalancedRoundRobinTaskPickingAlgorithm', () => {
       beforeEach(() => {
         randomNumberGeneratorMock.execute = () => 2;
 
-        task   = balancedRoundRobinTaskPickingAlgorithm.selectNextTaskToProcess();
-        result = balancedRoundRobinTaskPickingAlgorithm.removeTaskFromProcessing(task);
+        task   = firstInFirstOutTaskPickingAlgorithm.selectNextTaskToProcess();
+        result = firstInFirstOutTaskPickingAlgorithm.removeTaskFromProcessing(task);
       });
 
       it('Returns removed task', () => {

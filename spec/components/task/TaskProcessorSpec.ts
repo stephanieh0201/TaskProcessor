@@ -1,6 +1,6 @@
 import ProgramExiter from '../../../src/components/helpers/ProgramExiter';
 import TaskProcessor from '../../../src/components/task/TaskProcessor';
-import AbstractTaskPickingAlgorithm from '../../../src/components/processingAlgorithm/AbstractTaskPickingAlgorithm';
+import AbstractTaskPickingAlgorithm from '../../../src/components/taskPickingAlgorithm/AbstractTaskPickingAlgorithm';
 import { Task } from '../../../src/components/task/Task';
 
 describe('A TaskProcessor', () => {

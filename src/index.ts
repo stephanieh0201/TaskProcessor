@@ -1,11 +1,11 @@
 import TaskProcessor from './components/task/TaskProcessor';
 import Config from './Config';
-import FirstInFirstOutTaskPickingAlgorithm from './components/processingAlgorithm/FirstInFirstOutTaskPickingAlgorithm';
+import FirstInFirstOutTaskPickingAlgorithm from './components/taskPickingAlgorithm/FirstInFirstOutTaskPickingAlgorithm';
 import RandomNumberGenerator from './components/helpers/RandomNumberGenerator';
-import RoundRobinTaskPickingAlgorithm from './components/processingAlgorithm/RoundRobinTaskPickingAlgorithm';
+import RoundRobinTaskPickingAlgorithm from './components/taskPickingAlgorithm/RoundRobinTaskPickingAlgorithm';
 import BalancedRoundRobinTaskPickingAlgorithm
-  from './components/processingAlgorithm/BalancedRoundRobinTaskPickingAlgorithm';
-import AbstractTaskPickingAlgorithm from './components/processingAlgorithm/AbstractTaskPickingAlgorithm';
+  from './components/taskPickingAlgorithm/BalancedRoundRobinTaskPickingAlgorithm';
+import AbstractTaskPickingAlgorithm from './components/taskPickingAlgorithm/AbstractTaskPickingAlgorithm';
 import ProgramExiter from './components/helpers/ProgramExiter';
 import { taskData } from './data/taskData';
 import { customerData } from './data/customerData';

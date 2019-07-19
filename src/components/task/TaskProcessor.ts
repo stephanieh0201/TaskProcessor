@@ -1,4 +1,4 @@
-import AbstractTaskPickingAlgorithm from '../processingAlgorithm/AbstractTaskPickingAlgorithm';
+import AbstractTaskPickingAlgorithm from '../taskPickingAlgorithm/AbstractTaskPickingAlgorithm';
 import ProgramExiter from '../helpers/ProgramExiter';
 import { Task } from './Task';
 
