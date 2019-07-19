@@ -1,14 +1,14 @@
 import { mockList } from '../../helpers/mockTasks';
 import { mockCustomers } from '../../helpers/mockCustomers';
 import RandomNumberGenerator from '../../../src/components/helpers/RandomNumberGenerator';
-import RoundRobinProcessingAlgorithm from '../../../src/components/processingAlgorithm/RoundRobinProcessingAlgorithm';
+import RoundRobinTaskPickingAlgorithm from '../../../src/components/processingAlgorithm/RoundRobinTaskPickingAlgorithm';
 
-describe('A RoundRobinProcessingAlgorithm', () => {
+describe('A RoundRobinTaskPickingAlgorithm', () => {
   const randomNumberGeneratorMock = {} as RandomNumberGenerator;
 
   describe('Moving next task to processing', () => {
     describe('Successfully with items in todo list', () => {
-      const roundRobinProcessingAlgorithm = new RoundRobinProcessingAlgorithm(
+      const roundRobinTaskPickingAlgorithm = new RoundRobinTaskPickingAlgorithm(
         mockList.items,
         10,
         mockCustomers.customers,
@@ -19,7 +19,7 @@ describe('A RoundRobinProcessingAlgorithm', () => {
       beforeAll(() => {
         randomNumberGeneratorMock.execute = () => 2;
 
-        result = roundRobinProcessingAlgorithm.moveNextTaskToProcessing();
+        result = roundRobinTaskPickingAlgorithm.selectNextTaskToProcess();
       });
 
       it('Returns task: customer 1', () => {
@@ -32,7 +32,7 @@ describe('A RoundRobinProcessingAlgorithm', () => {
     });
 
     describe('Successfully without items in todo list', () => {
-      const roundRobinProcessingAlgorithm = new RoundRobinProcessingAlgorithm(
+      const roundRobinTaskPickingAlgorithm = new RoundRobinTaskPickingAlgorithm(
         [],
         10,
         mockCustomers.customers,
@@ -43,11 +43,34 @@ describe('A RoundRobinProcessingAlgorithm', () => {
       beforeAll(() => {
         randomNumberGeneratorMock.execute = () => 2;
 
-        result = roundRobinProcessingAlgorithm.moveNextTaskToProcessing();
+        result = roundRobinTaskPickingAlgorithm.selectNextTaskToProcess();
       });
 
       it('Returns undefined', () => {
         expect(result).toBe(undefined);
+      });
+    });
+  });
+
+  describe('Removing task from processing', () => {
+    describe('Successfully', () => {
+      const roundRobinTaskPickingAlgorithm = new RoundRobinTaskPickingAlgorithm(
+        [{ _id: '1', customerId: '1', insertedTime: new Date().toString() }],
+        10,
+        mockCustomers.customers,
+        randomNumberGeneratorMock);
+
+      let result;
+      let task;
+      beforeEach(() => {
+        randomNumberGeneratorMock.execute = () => 2;
+
+        task   = roundRobinTaskPickingAlgorithm.selectNextTaskToProcess();
+        result = roundRobinTaskPickingAlgorithm.removeTaskFromProcessing(task);
+      });
+
+      it('Returns removed task', () => {
+        expect(result._id).toBe('1');
       });
     });
   });

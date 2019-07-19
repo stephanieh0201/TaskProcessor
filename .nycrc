@@ -10,7 +10,8 @@
     "dist/spec/**/*",
     "src/index.ts",
     "coverage/",
-    "spec/**/*"
+    "spec/**/*",
+    "src/data/*"
   ],
   "all": true,
   "sourceMap": true
