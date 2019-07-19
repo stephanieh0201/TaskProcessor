@@ -4,8 +4,7 @@ import RandomNumberGenerator from './RandomNumberGenerator';
 import AbstractProcessingAlgorithm from './AbstractProcessingAlgorithm';
 
 export default class BalancedRoundRobinProcessingAlgorithm extends AbstractProcessingAlgorithm {
-  private todoListPerCustomer: Record<string, Task[]> = {};
-
+  private todoListPerCustomer: Record<string, Task[]>           = {};
   private processingListSizePerCustomer: Record<string, number> = {};
 
   public constructor(todoList: Task[],
@@ -34,7 +33,7 @@ export default class BalancedRoundRobinProcessingAlgorithm extends AbstractProce
       this.processingListSizePerCustomer[customerId] = this.processingListSizePerCustomer[customerId] ? this.processingListSizePerCustomer[customerId] + 1 : 1;
 
       this.processingList[task._id] = task;
-
+      console.log(`Added to processing for customer: ${customerId}`);
       console.log('Tasks processing per customer ID:');
       console.log(this.processingListSizePerCustomer);
       this.outputListSizes();
@@ -61,6 +60,10 @@ export default class BalancedRoundRobinProcessingAlgorithm extends AbstractProce
         minTasks       = this.processingListSizePerCustomer[customerId];
       }
     });
+
+    console.log(`Removed from processing for customer: ${task.customerId}`);
+    console.log('Tasks processing per customer ID:');
+    console.log(this.processingListSizePerCustomer);
     this.outputListSizes();
 
     this.selectTaskAndStartProcessForCustomer(nextCustomerId);

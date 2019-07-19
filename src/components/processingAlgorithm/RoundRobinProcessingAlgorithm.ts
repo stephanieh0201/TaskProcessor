@@ -5,8 +5,8 @@ import AbstractProcessingAlgorithm from './AbstractProcessingAlgorithm';
 
 export default class RoundRobinProcessingAlgorithm extends AbstractProcessingAlgorithm {
   private todoListPerCustomer: Record<string, Task[]> = {};
-  private customerIds: string[];
   private currentCustomerIndex                        = 0;
+  private customerIds: string[];
 
   public constructor(todoList: Task[],
                      maxProcessingListSize: number,
