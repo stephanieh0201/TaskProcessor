@@ -6,11 +6,27 @@ three algorithms that will process the tasks in different orders depending on wh
 algorithm is selected.
 
 #### First In First Out
+For this algorithm, tasks should be selected from the todo list simply based on their
+insertedTime. The customer the tasks are associated with is not pertinent to the algorithm. 
+The task chosen to be placed in the processing list should be the task with the earliest 
+insertedTime of all todo tasks.
 
 #### Round Robin
+For this algorithm, tasks should be selected from the todo list based on the customer they 
+are associated with. This should be done in a round robin fashion based on the customers. 
+For example, if there are 3 customers, the first task is chosen for customer1, then a task 
+for customer2, customer3, then back to customer1, and so on. When choosing a task narrowed 
+down to a specific customer (e.g knowing that you are choosing a task for customer1), the 
+task with the earliest insertedTime should be selected.
 
 #### Balanced Round Robin
-
+For this algorithm, tasks should be selected from the todo list based on the customer they
+are associated with. This should be done in a round robin fashion based on the customers 
+and the number of tasks currently in the processing list. The goal of this algorithm is to 
+have the same number of tasks for each customer in the processing list at any time. This 
+should be demonstrated by setting much higher values for  taskMinSeconds and taskMaxSeconds 
+for a specific customer, and showing that tasks are still distributed evenly across all customers. 
+One customer should not dominate the processing list.
 ## Setup
 #### Requirements
 - Install node (https://nodejs.org)
