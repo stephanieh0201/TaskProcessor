@@ -1,7 +1,3 @@
-import FirstInFirstOutProcessingAlgorithm
-  from '../../src/components/processingAlgorithm/FirstInFirstOutProcessingAlgorithm';
-import { mockList } from '../../src/mockData/mockList';
-import { mockCustomers } from '../../src/mockData/mockCustomers';
 import RandomNumberGenerator from '../../src/components/processingAlgorithm/RandomNumberGenerator';
 
 describe('A RandomNumberGenerator', () => {

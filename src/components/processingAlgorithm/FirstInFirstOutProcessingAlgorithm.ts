@@ -12,7 +12,7 @@ export default class FirstInFirstOutProcessingAlgorithm extends AbstractProcessi
     this.sortLists();
   }
 
-  public moveNextTaskToProcessing(): void {
+  public moveNextTaskToProcessing(): Task {
     if (this.todoList.length > 0 && this.processingListSize() < this.maxProcessingListSize) {
       const task     = this.todoList.shift();
       const customer = this.customerList.find((customer: Customer) => {
@@ -27,6 +27,8 @@ export default class FirstInFirstOutProcessingAlgorithm extends AbstractProcessi
       this.outputListSizes();
 
       this.processTask(task);
+
+      return task;
     }
   }
 

@@ -1,6 +1,4 @@
-import { CustomerList } from '../components/customer/Customer';
-
-export const mockCustomers: CustomerList = {
+export const mockCustomers: any = {
   customers: [{
     _id: '1',
     taskMinSeconds: 0,

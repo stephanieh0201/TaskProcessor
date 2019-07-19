@@ -7,12 +7,12 @@ import BalancedRoundRobinProcessingAlgorithm
   from './components/processingAlgorithm/BalancedRoundRobinProcessingAlgorithm';
 import AbstractProcessingAlgorithm from './components/processingAlgorithm/AbstractProcessingAlgorithm';
 import ProgramExiter from './components/processingAlgorithm/ProgramExiter';
-import { mockList } from './mockData/mockList';
-import { mockCustomers } from './mockData/mockCustomers';
+import { taskData } from './data/taskData';
+import { customerData } from './data/customerData';
 
 const startProgram = async () => {
-  const taskDocuments = mockList.items;
-  const customerDocuments = mockCustomers.customers;
+  const taskDocuments = taskData.items;
+  const customerDocuments = customerData.customers;
   const randomNumberGenerator = new RandomNumberGenerator();
 
   let processingAlgorithm: AbstractProcessingAlgorithm;

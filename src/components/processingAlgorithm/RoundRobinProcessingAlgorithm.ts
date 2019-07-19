@@ -16,11 +16,11 @@ export default class RoundRobinProcessingAlgorithm extends AbstractProcessingAlg
     this.sortListByCustomer();
   }
 
-  public moveNextTaskToProcessing(): void {
-    this.selectTaskAndStartProcessForCustomer(this.customerIds[this.currentCustomerIndex]);
+  public moveNextTaskToProcessing(): Task {
+    return this.selectTaskAndStartProcessForCustomer(this.customerIds[this.currentCustomerIndex]);
   }
 
-  private selectTaskAndStartProcessForCustomer(customerId: string): void {
+  private selectTaskAndStartProcessForCustomer(customerId: string): Task {
     if (this.todoListPerCustomer[customerId].length > 0 && this.processingListSize() < this.maxProcessingListSize) {
       this.setNextCustomer();
 
@@ -36,6 +36,8 @@ export default class RoundRobinProcessingAlgorithm extends AbstractProcessingAlg
       this.outputListSizes();
 
       this.processTask(task);
+
+      return task;
     }
   }
 

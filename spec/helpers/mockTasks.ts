@@ -1,4 +1,4 @@
-import { List } from '../components/lists/List';
+import { List } from '../../src/components/lists/List';
 
 export const mockList: List = {
   items: [{

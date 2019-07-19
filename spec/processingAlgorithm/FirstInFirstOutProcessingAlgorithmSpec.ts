@@ -1,7 +1,7 @@
 import FirstInFirstOutProcessingAlgorithm
   from '../../src/components/processingAlgorithm/FirstInFirstOutProcessingAlgorithm';
-import { mockList } from '../../src/mockData/mockList';
-import { mockCustomers } from '../../src/mockData/mockCustomers';
+import { mockList } from '../helpers/mockTasks';
+import { mockCustomers } from '../helpers/mockCustomers';
 import RandomNumberGenerator from '../../src/components/processingAlgorithm/RandomNumberGenerator';
 
 describe('A FirstInFirstOutProcessingAlgorithm', () => {
@@ -9,7 +9,11 @@ describe('A FirstInFirstOutProcessingAlgorithm', () => {
 
   describe('Moving next task to processing', () => {
     describe('Successfully with items in todo list', () => {
-      const firstInFirstOutProcessingAlgorithm = new FirstInFirstOutProcessingAlgorithm(mockList.items, 10, mockCustomers.customers, randomNumberGeneratorMock);
+      const firstInFirstOutProcessingAlgorithm = new FirstInFirstOutProcessingAlgorithm(
+        mockList.items,
+        10,
+        mockCustomers.customers,
+        randomNumberGeneratorMock);
 
       let result;
 
@@ -25,7 +29,11 @@ describe('A FirstInFirstOutProcessingAlgorithm', () => {
     });
 
     describe('Successfully without items in todo list', () => {
-      const firstInFirstOutProcessingAlgorithm = new FirstInFirstOutProcessingAlgorithm([], 10, mockCustomers.customers, randomNumberGeneratorMock);
+      const firstInFirstOutProcessingAlgorithm = new FirstInFirstOutProcessingAlgorithm(
+        [],
+        10,
+        mockCustomers.customers,
+        randomNumberGeneratorMock);
 
       let result;
 

@@ -15,13 +15,13 @@ export default class BalancedRoundRobinProcessingAlgorithm extends AbstractProce
     this.sortListByCustomer();
   }
 
-  public moveNextTaskToProcessing(): void {
-    Object.keys(this.todoListPerCustomer).forEach(customerId => {
-      this.selectTaskAndStartProcessForCustomer(customerId);
+  public moveNextTaskToProcessing(): Task[] {
+    return Object.keys(this.todoListPerCustomer).map(customerId => {
+      return this.selectTaskAndStartProcessForCustomer(customerId);
     });
   }
 
-  private selectTaskAndStartProcessForCustomer(customerId: string): void {
+  private selectTaskAndStartProcessForCustomer(customerId: string): Task {
     if (this.todoListPerCustomer[customerId].length > 0 && this.processingListSize() < this.maxProcessingListSize) {
       const task     = this.todoListPerCustomer[customerId].shift();
       const customer = this.customerList.find(customer => {
@@ -39,6 +39,7 @@ export default class BalancedRoundRobinProcessingAlgorithm extends AbstractProce
       this.outputListSizes();
 
       this.processTask(task);
+      return task;
     }
   }
 
