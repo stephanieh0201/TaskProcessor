@@ -20,17 +20,27 @@ export default abstract class AbstractProcessingAlgorithm {
   }
 
   public abstract moveNextTaskToProcessing(): void;
+
   protected abstract removeTaskFromProcessing(task: Task): void;
 
   protected processingListSize(): number {
     return Object.keys(this.processingList).length;
   }
 
+  protected outputListSizes(): void {
+    console.log(`Processing list size: ${this.processingListSize()}`);
+    console.log(`Todo list size: ${this.todoListSize()}`);
+    console.log('---------------------');
+  }
+
+  protected abstract todoListSize(): number;
+
   protected processTask(task: Task): void {
     setTimeout(() => this.removeTaskFromProcessing(task), task.timeToProcess * 1000);
   }
-  protected sortList(): void {
-    this.todoList.sort((firstTask: Task, secondTask: Task) => {
+
+  protected sortLists(): void {
+    this.todoList.sort((firstTask, secondTask) => {
       if (firstTask.insertedTime < secondTask.insertedTime) {
         return -1;
       }
@@ -38,6 +48,13 @@ export default abstract class AbstractProcessingAlgorithm {
         return 1;
       }
       return 0;
+    });
+
+    this.customerList.sort((firstCustomer, secondCustomer) => {
+      if (firstCustomer._id < secondCustomer._id) {
+        return -1;
+      }
+      return 1;
     });
   }
 }

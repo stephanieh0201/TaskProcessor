@@ -35,11 +35,11 @@ export default class BalancedRoundRobinProcessingAlgorithm extends AbstractProce
 
       this.processingList[task._id] = task;
 
-      console.log('Tasks per customer ID:');
+      console.log('Tasks processing per customer ID:');
       console.log(this.processingListSizePerCustomer);
+      this.outputListSizes();
 
       this.processTask(task);
-      // setTimeout(() => this.removeTaskFromProcessing(task), task.timeToProcess * 1000);
     }
   }
 
@@ -61,12 +61,13 @@ export default class BalancedRoundRobinProcessingAlgorithm extends AbstractProce
         minTasks       = this.processingListSizePerCustomer[customerId];
       }
     });
+    this.outputListSizes();
 
     this.selectTaskAndStartProcessForCustomer(nextCustomerId);
   }
 
   private sortListByCustomer(): void {
-    this.sortList();
+    this.sortLists();
 
     this.customerList.forEach(customer => {
       this.todoListPerCustomer[customer._id] = [];
@@ -77,4 +78,11 @@ export default class BalancedRoundRobinProcessingAlgorithm extends AbstractProce
     });
   }
 
+  protected todoListSize(): number {
+    let size = 0;
+
+    Object.keys(this.todoListPerCustomer).forEach(customerId => size += this.todoListPerCustomer[customerId].length);
+
+    return size;
+  }
 }

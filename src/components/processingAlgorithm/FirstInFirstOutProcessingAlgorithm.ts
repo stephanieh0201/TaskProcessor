@@ -9,7 +9,7 @@ export default class FirstInFirstOutProcessingAlgorithm extends AbstractProcessi
                      customerList: Customer[],
                      randomNumberGenerator: RandomNumberGenerator) {
     super(todoList, maxProcessingListSize, customerList, randomNumberGenerator);
-    this.sortList();
+    this.sortLists();
   }
 
   public moveNextTaskToProcessing(): void {
@@ -23,7 +23,8 @@ export default class FirstInFirstOutProcessingAlgorithm extends AbstractProcessi
 
       this.processingList[task._id] = task;
 
-      console.log(`adding ${task._id}`);
+      console.log(`Added task to processing: ${task._id}`);
+      this.outputListSizes();
 
       this.processTask(task);
     }
@@ -31,12 +32,17 @@ export default class FirstInFirstOutProcessingAlgorithm extends AbstractProcessi
 
   protected removeTaskFromProcessing(task: Task): void {
     delete this.processingList[task._id];
-    console.log(`removing ${task._id}`);
     task.insertedTime  = new Date().toString();
     task.timeToProcess = null;
 
     this.todoList.push(task);
+    console.log(`Removed task from processing: ${task._id}`);
+    this.outputListSizes();
 
     this.moveNextTaskToProcessing();
+  }
+
+  protected todoListSize(): number {
+    return this.todoList.length;
   }
 }
