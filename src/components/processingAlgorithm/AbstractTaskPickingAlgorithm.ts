@@ -23,6 +23,8 @@ export default abstract class AbstractTaskPickingAlgorithm {
 
   public abstract removeTaskFromProcessing(task: Task): void;
 
+  protected abstract todoListSize(): number;
+
   public processingListSize(): number {
     return Object.keys(this.processingList).length;
   }
@@ -52,7 +54,5 @@ export default abstract class AbstractTaskPickingAlgorithm {
       return 1;
     });
   }
-
-  protected abstract todoListSize(): number;
 
 }

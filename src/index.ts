@@ -26,7 +26,7 @@ const startProgram = async () => {
     processingAlgorithm = new FirstInFirstOutTaskPickingAlgorithm(todoTaskDocuments, Config.MAX_TASKS_PROCESSING, customerDocuments, randomNumberGenerator);
   }
 
-  const taskProcessor = new TaskProcessor(processingAlgorithm, new ProgramExiter(processingAlgorithm), Config.MAX_TASKS_PROCESSING);
+  const taskProcessor = new TaskProcessor(processingAlgorithm, new ProgramExiter(), Config.MAX_TASKS_PROCESSING);
 
   taskProcessor.run();
 };

@@ -54,7 +54,7 @@ describe('A FirstInFirstOutTaskPickingAlgorithm', () => {
   describe('Removing task from processing', () => {
     describe('Successfully', () => {
       const firstInFirstOutTaskPickingAlgorithm = new FirstInFirstOutTaskPickingAlgorithm(
-        [{ _id: '1', customerId: '1', insertedTime: new Date().toString() }],
+        [ {_id: '1', customerId: '1', insertedTime: new Date().toString() }],
         10,
         mockCustomers.customers,
         randomNumberGeneratorMock);

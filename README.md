@@ -38,13 +38,13 @@ One customer should not dominate the processing list.
 To run the program with each algorithm use the following commands:
 
 #### First In First Out
-- `npm run start fifo`
+- `npm run fifo`
 
 #### Round Robin
-- `npm run start round`
+- `npm run round`
 
 #### Balanced Round Robin
-- `npm run start balanced`
+- `npm run balanced`
 
 The task processor will run continuously, it can be stopped at any time by pressing any key and restarted with the above 
 commands.

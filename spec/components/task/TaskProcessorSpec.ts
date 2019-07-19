@@ -6,7 +6,8 @@ import { Task } from '../../../src/components/task/Task';
 describe('A TaskProcessor', () => {
   const programmExiterMock      = {} as ProgramExiter;
   const processingAlgorithmMock = {} as AbstractTaskPickingAlgorithm;
-  const taskProcessor           = new TaskProcessor(processingAlgorithmMock, programmExiterMock, 10);
+
+  const taskProcessor = new TaskProcessor(processingAlgorithmMock, programmExiterMock, 10);
 
   describe('Executing', () => {
     describe('Successfully', () => {

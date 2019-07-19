@@ -70,4 +70,4 @@ export const mockList: List = {
     customerId: '1',
     insertedTime: '2018-01-14T15:48:14+0000',
   }],
-}
+};

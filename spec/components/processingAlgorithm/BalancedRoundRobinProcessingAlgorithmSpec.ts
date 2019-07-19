@@ -30,22 +30,6 @@ describe('A BalancedRoundRobinTaskPickingAlgorithm', () => {
       it('Returns first task: id 13', () => {
         expect(result._id).toBe('13');
       });
-
-      // it('Returns second task: customer 2', () => {
-      //   expect(result[1].customerId).toBe('2');
-      // });
-      //
-      // it('Returns second task: id 5', () => {
-      //   expect(result[1]._id).toBe('5');
-      // });
-      //
-      // it('Returns third task: customer 3', () => {
-      //   expect(result[2].customerId).toBe('3');
-      // });
-      //
-      // it('Returns third task: id 12', () => {
-      //   expect(result[2]._id).toBe('12');
-      // });
     });
 
     describe('Successfully without items in todo list', () => {
@@ -65,8 +49,6 @@ describe('A BalancedRoundRobinTaskPickingAlgorithm', () => {
 
       it('Returns array of undefined', () => {
         expect(result).toBe(undefined);
-        // expect(result[1]).toBe(undefined);
-        // expect(result[2]).toBe(undefined);
       });
     });
   });
@@ -74,7 +56,7 @@ describe('A BalancedRoundRobinTaskPickingAlgorithm', () => {
   describe('Removing task from processing', () => {
     describe('Successfully', () => {
       const balancedRoundRobinTaskPickingAlgorithm = new BalancedRoundRobinTaskPickingAlgorithm(
-        [{ _id: '1', customerId: '1', insertedTime: new Date().toString() }],
+        [ {_id: '1', customerId: '1', insertedTime: new Date().toString() }],
         10,
         mockCustomers.customers,
         randomNumberGeneratorMock);
