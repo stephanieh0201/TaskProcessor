@@ -1,20 +1,9 @@
-import mongoose from 'mongoose';
-
-const Schema = mongoose.Schema;
-
-export interface CustomerDocument extends mongoose.Document {
+export interface Customer {
   _id: string;
   taskMinSeconds: number;
   taskMaxSeconds: number;
 }
 
 export interface CustomerList {
-  customers: CustomerDocument[];
+  customers: Customer[];
 }
-
-const customerSchema = new Schema({
-  taskMinSeconds: Number,
-  taskMaxSeconds: Number,
-});
-
-export const customerMongooseModel = mongoose.model<CustomerDocument>('Customer', customerSchema);
