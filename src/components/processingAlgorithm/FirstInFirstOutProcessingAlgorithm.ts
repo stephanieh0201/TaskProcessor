@@ -1,6 +1,6 @@
 import { Task } from '../task/Task';
 import { Customer } from '../customer/Customer';
-import RandomNumberGenerator from './RandomNumberGenerator';
+import RandomNumberGenerator from '../helpers/RandomNumberGenerator';
 import AbstractProcessingAlgorithm from './AbstractProcessingAlgorithm';
 
 export default class FirstInFirstOutProcessingAlgorithm extends AbstractProcessingAlgorithm {

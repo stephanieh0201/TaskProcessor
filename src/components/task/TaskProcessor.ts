@@ -1,5 +1,5 @@
 import AbstractProcessingAlgorithm from '../processingAlgorithm/AbstractProcessingAlgorithm';
-import ProgramExiter from '../processingAlgorithm/ProgramExiter';
+import ProgramExiter from '../helpers/ProgramExiter';
 
 export default class TaskProcessor {
   private processingAlgorithm: AbstractProcessingAlgorithm;

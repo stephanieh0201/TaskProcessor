@@ -1,6 +1,6 @@
 import { mockList } from '../helpers/mockTasks';
 import { mockCustomers } from '../helpers/mockCustomers';
-import RandomNumberGenerator from '../../src/components/processingAlgorithm/RandomNumberGenerator';
+import RandomNumberGenerator from '../../src/components/helpers/RandomNumberGenerator';
 import RoundRobinProcessingAlgorithm from '../../src/components/processingAlgorithm/RoundRobinProcessingAlgorithm';
 
 describe('A RoundRobinProcessingAlgorithm', () => {

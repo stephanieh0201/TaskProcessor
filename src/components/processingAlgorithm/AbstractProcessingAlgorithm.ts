@@ -1,6 +1,6 @@
 import { Task, TaskList } from '../task/Task';
 import { Customer } from '../customer/Customer';
-import RandomNumberGenerator from './RandomNumberGenerator';
+import RandomNumberGenerator from '../helpers/RandomNumberGenerator';
 
 export default abstract class AbstractProcessingAlgorithm {
   protected todoList: Task[];
@@ -30,6 +30,7 @@ export default abstract class AbstractProcessingAlgorithm {
   protected outputListSizes(): void {
     console.log(`Processing list size: ${this.processingListSize()}`);
     console.log(`Todo list size: ${this.todoListSize()}`);
+    console.log('Press any key to exit');
     console.log('---------------------');
   }
 

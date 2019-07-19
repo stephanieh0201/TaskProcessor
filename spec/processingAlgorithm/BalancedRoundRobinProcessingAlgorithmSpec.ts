@@ -1,4 +1,4 @@
-import RandomNumberGenerator from '../../src/components/processingAlgorithm/RandomNumberGenerator';
+import RandomNumberGenerator from '../../src/components/helpers/RandomNumberGenerator';
 import BalancedRoundRobinProcessingAlgorithm
   from '../../src/components/processingAlgorithm/BalancedRoundRobinProcessingAlgorithm';
 import { mockList } from '../helpers/mockTasks';

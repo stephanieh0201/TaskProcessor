@@ -1,4 +1,4 @@
-import RandomNumberGenerator from '../../src/components/processingAlgorithm/RandomNumberGenerator';
+import RandomNumberGenerator from '../../src/components/helpers/RandomNumberGenerator';
 
 describe('A RandomNumberGenerator', () => {
   const randomNumberGenerator = new RandomNumberGenerator();
