@@ -2,7 +2,7 @@ import { Task, TaskList } from '../task/Task';
 import { Customer } from '../customer/Customer';
 import RandomNumberGenerator from '../helpers/RandomNumberGenerator';
 
-export default abstract class AbstractProcessingAlgorithm {
+export default abstract class AbstractTaskPickingAlgorithm {
   protected todoList: Task[];
   protected maxProcessingListSize: number;
   protected customerList: Customer[];
@@ -19,11 +19,11 @@ export default abstract class AbstractProcessingAlgorithm {
     this.randomNumberGenerator = randomNumberGenerator;
   }
 
-  public abstract moveNextTaskToProcessing(): Task | Task[];
+  public abstract selectNextTaskToProcess(): Task | Task[] | undefined;
 
-  protected abstract removeTaskFromProcessing(task: Task): void;
+  public abstract removeTaskFromProcessing(task: Task): void;
 
-  protected processingListSize(): number {
+  public processingListSize(): number {
     return Object.keys(this.processingList).length;
   }
 
@@ -32,12 +32,6 @@ export default abstract class AbstractProcessingAlgorithm {
     console.log(`Todo list size: ${this.todoListSize()}`);
     console.log('Press any key to exit');
     console.log('---------------------');
-  }
-
-  protected abstract todoListSize(): number;
-
-  protected processTask(task: Task): void {
-    setTimeout(() => this.removeTaskFromProcessing(task), task.timeToProcess * 1000);
   }
 
   protected sortLists(): void {
@@ -58,4 +52,7 @@ export default abstract class AbstractProcessingAlgorithm {
       return 1;
     });
   }
+
+  protected abstract todoListSize(): number;
+
 }

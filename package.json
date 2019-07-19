@@ -12,7 +12,7 @@
     "fifo": "npm run prepare && node dist/src/index.js",
     "round": "npm run prepare && node dist/src/index.js round",
     "balanced": "npm run prepare && node dist/src/index.js balanced",
-    "test": "npm run prepare && nyc jasmine"
+    "test": "npm run build && nyc jasmine"
   },
   "author": "Stephanie Verlingo",
   "license": "ISC",

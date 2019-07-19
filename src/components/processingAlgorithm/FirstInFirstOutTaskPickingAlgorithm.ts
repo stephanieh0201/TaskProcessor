@@ -1,9 +1,9 @@
 import { Task } from '../task/Task';
 import { Customer } from '../customer/Customer';
 import RandomNumberGenerator from '../helpers/RandomNumberGenerator';
-import AbstractProcessingAlgorithm from './AbstractProcessingAlgorithm';
+import AbstractTaskPickingAlgorithm from './AbstractTaskPickingAlgorithm';
 
-export default class FirstInFirstOutProcessingAlgorithm extends AbstractProcessingAlgorithm {
+export default class FirstInFirstOutTaskPickingAlgorithm extends AbstractTaskPickingAlgorithm {
   public constructor(todoList: Task[],
                      maxProcessingListSize: number,
                      customerList: Customer[],
@@ -12,7 +12,7 @@ export default class FirstInFirstOutProcessingAlgorithm extends AbstractProcessi
     this.sortLists();
   }
 
-  public moveNextTaskToProcessing(): Task {
+  public selectNextTaskToProcess(): Task | undefined {
     if (this.todoList.length > 0 && this.processingListSize() < this.maxProcessingListSize) {
       const task     = this.todoList.shift();
       const customer = this.customerList.find((customer: Customer) => {
@@ -26,13 +26,12 @@ export default class FirstInFirstOutProcessingAlgorithm extends AbstractProcessi
       console.log(`Added task to processing: ${task._id}`);
       this.outputListSizes();
 
-      this.processTask(task);
-
       return task;
     }
+    return;
   }
 
-  protected removeTaskFromProcessing(task: Task): void {
+  public removeTaskFromProcessing(task: Task): Task {
     delete this.processingList[task._id];
     task.insertedTime  = new Date().toString();
     task.timeToProcess = null;
@@ -41,7 +40,7 @@ export default class FirstInFirstOutProcessingAlgorithm extends AbstractProcessi
     console.log(`Removed task from processing: ${task._id}`);
     this.outputListSizes();
 
-    this.moveNextTaskToProcessing();
+    return task;
   }
 
   protected todoListSize(): number {

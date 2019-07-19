@@ -1,9 +1,9 @@
 import { Task } from '../task/Task';
 import { Customer } from '../customer/Customer';
 import RandomNumberGenerator from '../helpers/RandomNumberGenerator';
-import AbstractProcessingAlgorithm from './AbstractProcessingAlgorithm';
+import AbstractTaskPickingAlgorithm from './AbstractTaskPickingAlgorithm';
 
-export default class RoundRobinProcessingAlgorithm extends AbstractProcessingAlgorithm {
+export default class RoundRobinTaskPickingAlgorithm extends AbstractTaskPickingAlgorithm {
   private todoListPerCustomer: Record<string, Task[]> = {};
   private currentCustomerIndex                        = 0;
   private customerIds: string[];
@@ -16,11 +16,23 @@ export default class RoundRobinProcessingAlgorithm extends AbstractProcessingAlg
     this.sortListByCustomer();
   }
 
-  public moveNextTaskToProcessing(): Task {
-    return this.selectTaskAndStartProcessForCustomer(this.customerIds[this.currentCustomerIndex]);
+  public selectNextTaskToProcess(): Task | undefined {
+    return this.selectTaskForCustomer(this.customerIds[this.currentCustomerIndex]);
   }
 
-  private selectTaskAndStartProcessForCustomer(customerId: string): Task {
+  public removeTaskFromProcessing(task: Task): Task {
+    delete this.processingList[task._id];
+    console.log(`Removed from processing for customer: ${task.customerId}`);
+    this.outputListSizes();
+    task.insertedTime  = new Date().toString();
+    task.timeToProcess = null;
+
+    this.todoListPerCustomer[task.customerId].push(task);
+
+    return task;
+  }
+
+  private selectTaskForCustomer(customerId: string): Task | undefined {
     if (this.todoListPerCustomer[customerId].length > 0 && this.processingListSize() < this.maxProcessingListSize) {
       this.setNextCustomer();
 
@@ -35,22 +47,9 @@ export default class RoundRobinProcessingAlgorithm extends AbstractProcessingAlg
       console.log(`Added to processing for customer: ${customerId}`);
       this.outputListSizes();
 
-      this.processTask(task);
-
       return task;
     }
-  }
-
-  protected removeTaskFromProcessing(task: Task): void {
-    delete this.processingList[task._id];
-    console.log(`Removed from processing for customer: ${task.customerId}`);
-    this.outputListSizes();
-    task.insertedTime  = new Date().toString();
-    task.timeToProcess = null;
-
-    this.todoListPerCustomer[task.customerId].push(task);
-
-    this.moveNextTaskToProcessing();
+    return;
   }
 
   private setNextCustomer(): void {

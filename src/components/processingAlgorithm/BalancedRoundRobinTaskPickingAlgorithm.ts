@@ -1,9 +1,9 @@
 import { Task } from '../task/Task';
 import { Customer } from '../customer/Customer';
 import RandomNumberGenerator from '../helpers/RandomNumberGenerator';
-import AbstractProcessingAlgorithm from './AbstractProcessingAlgorithm';
+import AbstractTaskPickingAlgorithm from './AbstractTaskPickingAlgorithm';
 
-export default class BalancedRoundRobinProcessingAlgorithm extends AbstractProcessingAlgorithm {
+export default class BalancedRoundRobinTaskPickingAlgorithm extends AbstractTaskPickingAlgorithm {
   private todoListPerCustomer: Record<string, Task[]>           = {};
   private processingListSizePerCustomer: Record<string, number> = {};
 
@@ -15,35 +15,13 @@ export default class BalancedRoundRobinProcessingAlgorithm extends AbstractProce
     this.sortListByCustomer();
   }
 
-  public moveNextTaskToProcessing(): Task[] {
+  public selectNextTaskToProcess(): Task[] {
     return Object.keys(this.todoListPerCustomer).map(customerId => {
       return this.selectTaskAndStartProcessForCustomer(customerId);
     });
   }
 
-  private selectTaskAndStartProcessForCustomer(customerId: string): Task {
-    if (this.todoListPerCustomer[customerId].length > 0 && this.processingListSize() < this.maxProcessingListSize) {
-      const task     = this.todoListPerCustomer[customerId].shift();
-      const customer = this.customerList.find(customer => {
-        return customer._id === customerId;
-      });
-
-      task.timeToProcess = this.randomNumberGenerator.execute(customer.taskMinSeconds, customer.taskMaxSeconds);
-
-      this.processingListSizePerCustomer[customerId] = this.processingListSizePerCustomer[customerId] ? this.processingListSizePerCustomer[customerId] + 1 : 1;
-
-      this.processingList[task._id] = task;
-      console.log(`Added to processing for customer: ${customerId}`);
-      console.log('Tasks processing per customer ID:');
-      console.log(this.processingListSizePerCustomer);
-      this.outputListSizes();
-
-      this.processTask(task);
-      return task;
-    }
-  }
-
-  protected removeTaskFromProcessing(task: Task): void {
+  public removeTaskFromProcessing(task: Task): Task {
     delete this.processingList[task._id];
     this.processingListSizePerCustomer[task.customerId] -= 1;
 
@@ -67,7 +45,30 @@ export default class BalancedRoundRobinProcessingAlgorithm extends AbstractProce
     console.log(this.processingListSizePerCustomer);
     this.outputListSizes();
 
-    this.selectTaskAndStartProcessForCustomer(nextCustomerId);
+    return task;
+  }
+
+  private selectTaskAndStartProcessForCustomer(customerId: string): Task | undefined {
+    if (this.todoListPerCustomer[customerId].length > 0 && this.processingListSize() < this.maxProcessingListSize) {
+      const task     = this.todoListPerCustomer[customerId].shift();
+      const customer = this.customerList.find(customer => {
+        return customer._id === customerId;
+      });
+
+      task.timeToProcess = this.randomNumberGenerator.execute(customer.taskMinSeconds, customer.taskMaxSeconds);
+
+      this.processingListSizePerCustomer[customerId] = this.processingListSizePerCustomer[customerId] ? this.processingListSizePerCustomer[customerId] + 1 : 1;
+
+      this.processingList[task._id] = task;
+
+      console.log(`Added to processing for customer: ${customerId}`);
+      console.log('Tasks processing per customer ID:');
+      console.log(this.processingListSizePerCustomer);
+      this.outputListSizes();
+
+      return task;
+    }
+    return;
   }
 
   private sortListByCustomer(): void {
