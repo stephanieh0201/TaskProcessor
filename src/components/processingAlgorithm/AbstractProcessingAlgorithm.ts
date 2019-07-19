@@ -19,7 +19,7 @@ export default abstract class AbstractProcessingAlgorithm {
     this.randomNumberGenerator = randomNumberGenerator;
   }
 
-  public abstract moveNextTaskToProcessing(): void;
+  public abstract moveNextTaskToProcessing(): Task | Task[];
 
   protected abstract removeTaskFromProcessing(task: Task): void;
 
