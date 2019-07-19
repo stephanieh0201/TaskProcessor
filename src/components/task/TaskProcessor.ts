@@ -20,27 +20,21 @@ export default class TaskProcessor {
 
     for (let i = 0; i < this.maxProcessingListSize; i++) {
       const task = this.processingAlgorithm.selectNextTaskToProcess();
-      this.processTaskOrArray(task);
+      if (task) {
+        this.processTask(task);
+      }
     }
   }
 
-  private processTaskOrArray(task: Task | Task[]) {
-    if (Array.isArray(task)) {
-      task.forEach(task => this.processTask(task));
-    } else if (task) {
-      this.processTask(task);
-    }
-  }
+  private processTask(task: Task) {
+    setTimeout(() => {
+      this.processingAlgorithm.removeTaskFromProcessing(task);
 
-  private processTask(task: Task | undefined) {
-    if (task) {
-      setTimeout(() => {
-        this.processingAlgorithm.removeTaskFromProcessing(task);
+      const nextTask = this.processingAlgorithm.selectNextTaskToProcess();
 
-        const nextTask = this.processingAlgorithm.selectNextTaskToProcess();
-
-        this.processTaskOrArray(nextTask);
-      },         task.timeToProcess * 1000);
-    }
+      if (nextTask) {
+        this.processTask(nextTask);
+      }
+    },         task.timeToProcess * 1000);
   }
 }

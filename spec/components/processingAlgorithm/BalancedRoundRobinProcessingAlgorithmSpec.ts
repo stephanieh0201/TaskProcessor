@@ -24,28 +24,28 @@ describe('A BalancedRoundRobinTaskPickingAlgorithm', () => {
       });
 
       it('Returns first task: customer 1', () => {
-        expect(result[0].customerId).toBe('1');
+        expect(result.customerId).toBe('1');
       });
 
       it('Returns first task: id 13', () => {
-        expect(result[0]._id).toBe('13');
+        expect(result._id).toBe('13');
       });
 
-      it('Returns second task: customer 2', () => {
-        expect(result[1].customerId).toBe('2');
-      });
-
-      it('Returns second task: id 5', () => {
-        expect(result[1]._id).toBe('5');
-      });
-
-      it('Returns third task: customer 3', () => {
-        expect(result[2].customerId).toBe('3');
-      });
-
-      it('Returns third task: id 12', () => {
-        expect(result[2]._id).toBe('12');
-      });
+      // it('Returns second task: customer 2', () => {
+      //   expect(result[1].customerId).toBe('2');
+      // });
+      //
+      // it('Returns second task: id 5', () => {
+      //   expect(result[1]._id).toBe('5');
+      // });
+      //
+      // it('Returns third task: customer 3', () => {
+      //   expect(result[2].customerId).toBe('3');
+      // });
+      //
+      // it('Returns third task: id 12', () => {
+      //   expect(result[2]._id).toBe('12');
+      // });
     });
 
     describe('Successfully without items in todo list', () => {
@@ -64,9 +64,9 @@ describe('A BalancedRoundRobinTaskPickingAlgorithm', () => {
       });
 
       it('Returns array of undefined', () => {
-        expect(result[0]).toBe(undefined);
-        expect(result[1]).toBe(undefined);
-        expect(result[2]).toBe(undefined);
+        expect(result).toBe(undefined);
+        // expect(result[1]).toBe(undefined);
+        // expect(result[2]).toBe(undefined);
       });
     });
   });
@@ -85,7 +85,7 @@ describe('A BalancedRoundRobinTaskPickingAlgorithm', () => {
         randomNumberGeneratorMock.execute = () => 2;
 
         task   = balancedRoundRobinTaskPickingAlgorithm.selectNextTaskToProcess();
-        result = balancedRoundRobinTaskPickingAlgorithm.removeTaskFromProcessing(task[0]);
+        result = balancedRoundRobinTaskPickingAlgorithm.removeTaskFromProcessing(task);
       });
 
       it('Returns removed task', () => {

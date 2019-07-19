@@ -15,10 +15,22 @@ export default class BalancedRoundRobinTaskPickingAlgorithm extends AbstractTask
     this.sortListByCustomer();
   }
 
-  public selectNextTaskToProcess(): Task[] {
-    return Object.keys(this.todoListPerCustomer).map(customerId => {
-      return this.selectTaskAndStartProcessForCustomer(customerId);
+  public selectNextTaskToProcess(): Task | undefined {
+    let nextCustomerId;
+    let minTasks = this.maxProcessingListSize;
+
+    Object.keys(this.processingListSizePerCustomer).forEach(customerId => {
+      if (this.processingListSizePerCustomer[customerId] < minTasks) {
+        nextCustomerId = customerId;
+        minTasks       = this.processingListSizePerCustomer[customerId];
+      }
     });
+
+    if (!nextCustomerId) {
+      return;
+    }
+
+    return this.selectTaskAndStartProcessForCustomer(nextCustomerId);
   }
 
   public removeTaskFromProcessing(task: Task): Task {
@@ -29,16 +41,6 @@ export default class BalancedRoundRobinTaskPickingAlgorithm extends AbstractTask
     task.timeToProcess = null;
 
     this.todoListPerCustomer[task.customerId].push(task);
-
-    let nextCustomerId = task.customerId;
-    let minTasks       = this.maxProcessingListSize;
-
-    Object.keys(this.processingListSizePerCustomer).forEach(customerId => {
-      if (this.processingListSizePerCustomer[customerId] < minTasks) {
-        nextCustomerId = customerId;
-        minTasks       = this.processingListSizePerCustomer[customerId];
-      }
-    });
 
     console.log(`Removed from processing for customer: ${task.customerId}`);
     console.log('Tasks processing per customer ID:');
@@ -75,7 +77,8 @@ export default class BalancedRoundRobinTaskPickingAlgorithm extends AbstractTask
     this.sortLists();
 
     this.customerList.forEach(customer => {
-      this.todoListPerCustomer[customer._id] = [];
+      this.todoListPerCustomer[customer._id]           = [];
+      this.processingListSizePerCustomer[customer._id] = 0;
     });
 
     this.todoList.forEach(task => {

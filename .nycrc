@@ -11,7 +11,8 @@
     "src/index.ts",
     "coverage/",
     "spec/**/*",
-    "src/data/*"
+    "src/data/*",
+    "src/Config.ts"
   ],
   "all": true,
   "sourceMap": true

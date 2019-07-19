@@ -22,8 +22,10 @@ export default class RoundRobinTaskPickingAlgorithm extends AbstractTaskPickingA
 
   public removeTaskFromProcessing(task: Task): Task {
     delete this.processingList[task._id];
+
     console.log(`Removed from processing for customer: ${task.customerId}`);
     this.outputListSizes();
+
     task.insertedTime  = new Date().toString();
     task.timeToProcess = null;
 

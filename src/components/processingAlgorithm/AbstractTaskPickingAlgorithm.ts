@@ -19,7 +19,7 @@ export default abstract class AbstractTaskPickingAlgorithm {
     this.randomNumberGenerator = randomNumberGenerator;
   }
 
-  public abstract selectNextTaskToProcess(): Task | Task[] | undefined;
+  public abstract selectNextTaskToProcess(): Task | undefined;
 
   public abstract removeTaskFromProcessing(task: Task): void;
 
