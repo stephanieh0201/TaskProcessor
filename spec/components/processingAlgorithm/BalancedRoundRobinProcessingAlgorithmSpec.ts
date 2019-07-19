@@ -1,8 +1,8 @@
-import RandomNumberGenerator from '../../src/components/helpers/RandomNumberGenerator';
+import RandomNumberGenerator from '../../../src/components/helpers/RandomNumberGenerator';
 import BalancedRoundRobinProcessingAlgorithm
-  from '../../src/components/processingAlgorithm/BalancedRoundRobinProcessingAlgorithm';
-import { mockList } from '../helpers/mockTasks';
-import { mockCustomers } from '../helpers/mockCustomers';
+  from '../../../src/components/processingAlgorithm/BalancedRoundRobinProcessingAlgorithm';
+import { mockList } from '../../helpers/mockTasks';
+import { mockCustomers } from '../../helpers/mockCustomers';
 
 describe('A BalancedRoundRobinProcessingAlgorithm', () => {
   const randomNumberGeneratorMock = {} as RandomNumberGenerator;

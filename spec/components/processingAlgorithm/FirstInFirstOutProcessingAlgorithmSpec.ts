@@ -1,8 +1,8 @@
 import FirstInFirstOutProcessingAlgorithm
-  from '../../src/components/processingAlgorithm/FirstInFirstOutProcessingAlgorithm';
-import { mockList } from '../helpers/mockTasks';
-import { mockCustomers } from '../helpers/mockCustomers';
-import RandomNumberGenerator from '../../src/components/helpers/RandomNumberGenerator';
+  from '../../../src/components/processingAlgorithm/FirstInFirstOutProcessingAlgorithm';
+import { mockList } from '../../helpers/mockTasks';
+import { mockCustomers } from '../../helpers/mockCustomers';
+import RandomNumberGenerator from '../../../src/components/helpers/RandomNumberGenerator';
 
 describe('A FirstInFirstOutProcessingAlgorithm', () => {
   const randomNumberGeneratorMock = {} as RandomNumberGenerator;

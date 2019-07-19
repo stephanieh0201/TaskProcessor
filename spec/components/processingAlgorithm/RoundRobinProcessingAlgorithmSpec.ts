@@ -1,7 +1,7 @@
-import { mockList } from '../helpers/mockTasks';
-import { mockCustomers } from '../helpers/mockCustomers';
-import RandomNumberGenerator from '../../src/components/helpers/RandomNumberGenerator';
-import RoundRobinProcessingAlgorithm from '../../src/components/processingAlgorithm/RoundRobinProcessingAlgorithm';
+import { mockList } from '../../helpers/mockTasks';
+import { mockCustomers } from '../../helpers/mockCustomers';
+import RandomNumberGenerator from '../../../src/components/helpers/RandomNumberGenerator';
+import RoundRobinProcessingAlgorithm from '../../../src/components/processingAlgorithm/RoundRobinProcessingAlgorithm';
 
 describe('A RoundRobinProcessingAlgorithm', () => {
   const randomNumberGeneratorMock = {} as RandomNumberGenerator;
